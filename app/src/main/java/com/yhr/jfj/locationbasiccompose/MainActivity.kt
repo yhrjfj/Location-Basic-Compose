@@ -22,19 +22,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yhr.jfj.locationbasiccompose.ui.theme.LocationBasicComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val viewModel: LocationViewModel = viewModel()
             LocationBasicComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MyApp()
+                    MyApp(viewModel)
                 }
             }
         }
@@ -42,11 +44,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(viewModel: LocationViewModel) {
     val context = LocalContext.current
     val locationUtils = LocationUtils(context)
     LocationDisplay(
-        locationUtils = locationUtils, context = context
+        locationUtils = locationUtils, viewModel, context = context
     )
 }
 
@@ -54,6 +56,7 @@ fun MyApp() {
 @Composable
 fun LocationDisplay(
     locationUtils: LocationUtils,
+    viewModel: LocationViewModel,
     context: Context
 ) {
     val requestPermissionLauncher = rememberLauncherForActivityResult(
@@ -66,7 +69,7 @@ fun LocationDisplay(
                     context as MainActivity,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                    context as MainActivity,
+                    context,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 )
                 if (rationalRequired) {
