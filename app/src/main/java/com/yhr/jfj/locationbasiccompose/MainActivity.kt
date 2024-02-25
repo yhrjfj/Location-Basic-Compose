@@ -48,7 +48,9 @@ fun MyApp(viewModel: LocationViewModel) {
     val context = LocalContext.current
     val locationUtils = LocationUtils(context)
     LocationDisplay(
-        locationUtils = locationUtils, viewModel, context = context
+        locationUtils = locationUtils,
+        viewModel,
+        context = context
     )
 }
 
