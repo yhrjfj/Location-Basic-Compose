@@ -66,4 +66,10 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // View Model Dependencies
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    // Location
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+
 }
