@@ -71,5 +71,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     // Location
     implementation("com.google.android.gms:play-services-location:21.1.0")
+    // Coordinate
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
 }
